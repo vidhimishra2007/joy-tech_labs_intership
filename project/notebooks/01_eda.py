@@ -11,6 +11,11 @@ just delegated to src/ modules instead of being inline.
 
 import pandas as pd
 
+project_root="enter_your_project_path"
+import sys
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 from src.data.loader import download_dataset, load_labels, build_shape_summary, build_imbalance_summary
 from src.evaluation.eda_utils import build_scale_summary, check_feature_variance, plot_channel
 
