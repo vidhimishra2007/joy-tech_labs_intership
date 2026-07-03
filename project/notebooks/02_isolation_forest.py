@@ -12,6 +12,10 @@ project_root = "enter_your_project_path"
 output_dir = os.path.join(project_root, "experiments", "results")
 os.makedirs(output_dir, exist_ok=True)
 
+import sys
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+
 import pandas as pd
 
 from src.data.loader import download_dataset, load_labels, build_shape_summary, build_imbalance_summary
