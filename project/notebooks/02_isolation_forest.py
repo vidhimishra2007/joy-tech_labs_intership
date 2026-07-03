@@ -8,7 +8,7 @@ Run from the project root:
 
 import os
 
-project_root = "/Users/vidhimishra/Desktop/CERT-SAT"
+project_root = "enter_your_project_path"
 output_dir = os.path.join(project_root, "experiments", "results")
 os.makedirs(output_dir, exist_ok=True)
 
