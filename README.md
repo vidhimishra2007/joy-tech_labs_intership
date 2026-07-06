@@ -28,9 +28,18 @@ The project focuses on detecting anomalies in multivariate time-series sensor da
 |   └── 03_hyperparameter_experiment.py
 ├── src/                   # Source code
 │   ├── data/
+|   |   └── loader.py
+|   |   └── preprocessing.py
+|   |   └── windowing.py
 │   ├── models/
+|   |   └── base_detector.py
+|   |   └── isolation_forest.py
 │   ├── evaluation/
+|   |   └── eda_utils.py
+|   |   └── metrics.py
 │   └── utils/
+|   |   └── config.py
+|   |   └── visualization.py
 ├── results/
 │   ├── contamination_experiment_summary.csv
 │   ├── isolation_forest_per_channel_results.csv
