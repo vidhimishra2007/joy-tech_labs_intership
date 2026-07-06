@@ -9,8 +9,6 @@ Run from the project root:
 import os
 
 project_root = "enter_your_project_path"
-output_dir = os.path.join(project_root, "experiments", "results")
-os.makedirs(output_dir, exist_ok=True)
 
 import sys
 if project_root not in sys.path:
@@ -60,7 +58,7 @@ def main():
     print("\nMean F1 by anomaly class (point vs contextual):")
     print(per_channel_df.groupby("class")["f1"].mean())
 
-    per_channel_df.to_csv(os.path.join("isolation_forest_per_channel_results.csv"), index=False)
+    per_channel_df.to_csv(os.path.join(project_root, "experiments", "results","isolation_forest_per_channel_results.csv"), index=False)
     print("\nSaved per-channel IF results for benchmarking against LSTM/LSTM-AE.")
 
     return results, per_channel_df, overall,  manager
@@ -71,6 +69,6 @@ if __name__ == "__main__":
 
 results, per_channel_df, overall, manager = main()
 
-save_path = os.path.join(output_dir, "isoforest_all_channels.joblib")
+save_path = os.path.joinos.path.join(project_root, "model_saved", "isoforest_all_channels.joblib")
 manager.save(save_path)
 print(f"Saved {len(manager.detectors)} channel models to {save_path}")
