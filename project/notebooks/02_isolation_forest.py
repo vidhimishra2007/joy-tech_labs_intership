@@ -22,6 +22,8 @@ from src.data.loader import download_dataset, load_labels, build_shape_summary, 
 from src.models.isolation_forest import run_isolation_forest
 from src.evaluation.metrics import aggregate_results
 from src.utils.config import WINDOW_SIZE, STRIDE
+from src.models.isolation_forest import MultiChannelIsolationForest
+manager = MultiChannelIsolationForest()
 
 pd.set_option("display.width", 120)
 
@@ -37,7 +39,7 @@ def main():
 
     results, skipped_channels = run_isolation_forest(
         labels, shape_df, paths["train_dir"], paths["test_dir"],
-        window_size=WINDOW_SIZE, stride=STRIDE, contam_lookup=contam_lookup,
+        window_size=WINDOW_SIZE, stride=STRIDE, contam_lookup=contam_lookup,manager=manager,
     )
     print(f"\nSkipped {len(skipped_channels)} channels (too short for WINDOW_SIZE={WINDOW_SIZE}):")
     print(skipped_channels)
@@ -61,7 +63,14 @@ def main():
     per_channel_df.to_csv(os.path.join("isolation_forest_per_channel_results.csv"), index=False)
     print("\nSaved per-channel IF results for benchmarking against LSTM/LSTM-AE.")
 
-    return results, per_channel_df, overall
+    return results, per_channel_df, overall,  manager
 
 if __name__ == "__main__":
     main()
+
+
+results, per_channel_df, overall, manager = main()
+
+save_path = os.path.join(output_dir, "isoforest_all_channels.joblib")
+manager.save(save_path)
+print(f"Saved {len(manager.detectors)} channel models to {save_path}")
