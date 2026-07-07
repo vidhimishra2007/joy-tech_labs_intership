@@ -16,3 +16,13 @@ def scale_channel(train_arr, test_arr):
     train_scaled = scaler.fit_transform(train_arr)
     test_scaled = scaler.transform(test_arr)
     return train_scaled, test_scaled
+
+def scale_channel_with_scaler(train_arr, test_arr):
+    """
+    Fit StandardScaler on train only, apply to both train and test, and
+    return the fitted scaler so it can be saved for live inference.
+    """
+    scaler = StandardScaler()
+    train_scaled = scaler.fit_transform(train_arr)
+    test_scaled = scaler.transform(test_arr)
+    return train_scaled, test_scaled, scaler
