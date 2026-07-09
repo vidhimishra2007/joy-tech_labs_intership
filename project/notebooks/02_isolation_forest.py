@@ -63,10 +63,6 @@ def main():
 
     return results, per_channel_df, overall,  manager
 
-if __name__ == "__main__":
-    main()
-
-
 results, per_channel_df, overall, manager = main()
 
 save_path = os.path.joinos.path.join(project_root, "model_saved", "isoforest_all_channels.joblib")
